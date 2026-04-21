@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
+mapboxgl.accessToken = 'pk.eyJ1IjoiYW51LTEzMTAiLCJhIjoiY21vN2o2ZXZ4MDF6bzJxb2twOGhwZmlpZiJ9.nPWourcl_A2pgkCFYiwssA'
 
 function getColor(fit) {
   if (fit === 'strong') return '#1D9E75'

@@ -12,7 +12,7 @@ export default function Controls({ commuteOrigin, setCommuteOrigin, budget, setB
   const [suggestions, setSuggestions] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
+  const MAPBOX_TOKEN = 'pk.eyJ1IjoiYW51LTEzMTAiLCJhIjoiY21vN2o2ZXZ4MDF6bzJxb2twOGhwZmlpZiJ9.nPWourcl_A2pgkCFYiwssA'
 
   const handleInput = async (e) => {
     const val = e.target.value
