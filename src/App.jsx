@@ -33,7 +33,7 @@ export default function App() {
   const mapRef = useRef(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}listings.json`)
+    fetch('/listing-pulse/listings.json')
       .then(r => r.json())
       .then(data => {
         setNeighborhoods(data)
