@@ -8,7 +8,7 @@ const BEDROOM_OPTIONS = [
 ]
 
 export default function Controls({ commuteOrigin, setCommuteOrigin, budget, setBudget, bedroom, setBedroom }) {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(commuteOrigin?.label || '')
   const [suggestions, setSuggestions] = useState([])
   const [loading, setLoading] = useState(false)
 

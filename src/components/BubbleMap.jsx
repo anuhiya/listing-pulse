@@ -35,14 +35,18 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
   const markers = useRef([])
 
   useEffect(() => {
-    if (mapRef) mapRef.current = map.current
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-73.97, 40.73],
-      zoom: 10.5
-    })
-  }, [])
+  if (map.current) return
+  map.current = new mapboxgl.Map({
+    container: mapContainer.current,
+    style: 'mapbox://styles/mapbox/dark-v11',
+    center: [-73.97, 40.73],
+    zoom: 10.5
+  })
+  if (mapRef) mapRef.current = map.current
+  map.current.once('load', () => {
+    map.current.fire('moveend')
+  })
+}, [])
 
   useEffect(() => {
     if (!map.current || !commuteOrigin) return
