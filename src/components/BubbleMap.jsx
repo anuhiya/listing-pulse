@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW51LTEzMTAiLCJhIjoiY21vN3Y3d2cyMGJncjJybjFyajV2em9vcyJ9.rsBkM0UThOLm-VU_P06nMw'
+mapboxgl.accessToken = 'YOpk.eyJ1IjoiYW51LTEzMTAiLCJhIjoiY21vN3Y3d2cyMGJncjJybjFyajV2em9vcyJ9.rsBkM0UThOLm-VU_P06nMw'
 
 function getColor(fit) {
   if (fit === 'strong') return '#1D9E75'
@@ -33,26 +33,28 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
   const mapContainer = useRef(null)
   const map = useRef(null)
   const markers = useRef([])
+  const mapLoaded = useRef(false)
 
   useEffect(() => {
-  if (map.current) return
-  map.current = new mapboxgl.Map({
-    container: mapContainer.current,
-    style: 'mapbox://styles/mapbox/dark-v11',
-    center: [-73.97, 40.73],
-    zoom: 10.5
-  })
-  if (mapRef) mapRef.current = map.current
-  map.current.once('load', () => {
-    map.current.fire('moveend')
-  })
-}, [])
+    if (map.current) return
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [-73.97, 40.73],
+      zoom: 10.5
+    })
+    if (mapRef) mapRef.current = map.current
+    map.current.once('load', () => {
+      mapLoaded.current = true
+    })
+  }, [])
 
   useEffect(() => {
-    if (!map.current || !commuteOrigin) return
+    if (!commuteOrigin || !neighborhoods.length) return
 
     const draw = () => {
-      if (!neighborhoods.length) return
+      if (!mapLoaded.current) return
+
       markers.current.forEach(m => m.remove())
       markers.current = []
 
@@ -129,7 +131,7 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
       })
     }
 
-    if (map.current.isStyleLoaded()) {
+    if (mapLoaded.current) {
       draw()
     } else {
       map.current.once('load', draw)
@@ -176,7 +178,6 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
           <div style={{ fontSize: '11px', color: '#B5D4F4' }}>Commute origin</div>
         </div>
       </div>
-
 
     </div>
   )
