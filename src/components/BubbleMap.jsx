@@ -52,6 +52,7 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
     if (!map.current || !commuteOrigin) return
 
     const draw = () => {
+      if (!neighborhoods.length) return
       markers.current.forEach(m => m.remove())
       markers.current = []
 
