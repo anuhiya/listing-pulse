@@ -50,7 +50,7 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
   }, [])
 
   useEffect(() => {
-    if (!commuteOrigin || !neighborhoods.length) return
+    if (!commuteOrigin || !neighborhoods.length || !map.current) return
 
     const draw = () => {
       if (!mapLoaded.current) return
@@ -134,7 +134,10 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
     if (mapLoaded.current) {
       draw()
     } else {
-      map.current.once('load', draw)
+      map.current.once('load', () => {
+        mapLoaded.current = true
+        draw()
+      })
     }
   }, [neighborhoods, commuteOrigin, budget, bedroom, selected])
 

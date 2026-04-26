@@ -35,7 +35,9 @@ export default function App() {
   useEffect(() => {
     fetch('/listings.json')
       .then(r => r.json())
-      .then(setNeighborhoods)
+      .then(data => {
+        setNeighborhoods(data)
+      })
   }, [])
 
   const handleHover = (n, e) => {
