@@ -101,6 +101,8 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
         .addTo(map.current)
       markers.current.push(originMarker)
 
+      map.current.flyTo({ center: [commuteOrigin.lng, commuteOrigin.lat], zoom: 11, duration: 1000 })
+
       neighborhoods.forEach(n => {
         const rent = n[bedroom]
         const fit = getFit(rent, budget, commuteOrigin.lat, commuteOrigin.lng, n.lat, n.lng)
