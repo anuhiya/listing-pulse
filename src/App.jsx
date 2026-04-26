@@ -47,7 +47,9 @@ export default function App() {
 
   const handlePan = (lat, lng) => {
     if (mapRef.current) {
-      mapRef.current.flyTo({ center: [lng, lat], zoom: 13, duration: 800 })
+      mapRef.current.flyTo({ center: [lng, lat], zoom: 13, duration: 1000 })
+    } else {
+      console.log('mapRef not connected')
     }
   }
 
