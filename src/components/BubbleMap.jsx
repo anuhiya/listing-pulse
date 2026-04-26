@@ -43,9 +43,9 @@ export default function BubbleMap({ neighborhoods, commuteOrigin, budget, bedroo
       center: [-73.97, 40.73],
       zoom: 10.5
     })
-    if (mapRef) mapRef.current = map.current
     map.current.once('load', () => {
       mapLoaded.current = true
+      if (mapRef) mapRef.current = map.current
     })
   }, [])
 
